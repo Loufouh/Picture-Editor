@@ -9,7 +9,6 @@ let img;
 
 let animationTimeout;
 
-
 window.onload = init;
 
 function init() {
@@ -18,7 +17,7 @@ function init() {
 
 	img = new Image();
 
-	img.src = "img/fleur.jpg";
+	img.src = "img/link.jpg";
 	img.onload = draw;
 
 }
@@ -35,19 +34,20 @@ function draw() {
 
 	putImageData(imgData1, 0, 0);
 
-	setTimeout(() => animation(0), 50);
+	animation(0);
+	setTimeout(() => animation(1), 1000);
 }
 
 function animation(i) {
-	for(let j = 0; j < 2000 && i < imgData1.data.length/4; j++) {
-		setPixelByIndex(i, imgData1, getPixelByIndex(i, imgData2))
-		i++;
-	}
+	let j;
 
-	if(i >= imgData1.data.length) {
-		imgData1 = imgData2;
-	} else {
-		setTimeout(() => animation(i), 50);
+	for(j = i; j < i + 10000 && j < imgData1.data.length/4; j += 2) {
+		setPixelByIndex(j, imgData1, getPixelByIndex(j, imgData2))
+	}
+	i = j;
+
+	if(i < imgData1.data.length/4) {
+		setTimeout(() => animation(i), 100);
 	}
 
 	putImageData(imgData1, 0, 0);
