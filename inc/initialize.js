@@ -32,17 +32,19 @@ function draw() {
 	imgData2 = getImageData(0, 0, canvas.width, canvas.height); 
 
 	filterImageData(imgData2, FilterType.SEPIA);
+
 	putImageData(imgData1, 0, 0);
 
 	setTimeout(() => animation(0), 50);
 }
 
 function animation(i) {
-	for(let j = 0; j < 2000 && i < imgData2.width*imgData2.height; j++) {
-		setPixelByIndex(i++, imgData1, getPixelByIndex(i, imgData2))
+	for(let j = 0; j < 2000 && i < imgData1.data.length/4; j++) {
+		setPixelByIndex(i, imgData1, getPixelByIndex(i, imgData2))
+		i++;
 	}
 
-	if(i >= imgData2.width*imgData2.height) {
+	if(i >= imgData1.data.length) {
 		imgData1 = imgData2;
 	} else {
 		setTimeout(() => animation(i), 50);
