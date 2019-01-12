@@ -46,13 +46,9 @@ function mapImageDataRect(posX, posY, width, height, imgData, func, use2DCoordin
 	return imgData;
 }
 
-
 function getPixel(x, y, imgData) {
 	return getPixelByIndex( getPixelIndex(x, y, imgData) , imgData);
 }
-
-
-
 
 function setPixel(x, y, imgData, color) {
 	setPixelByIndex(getPixelIndex(x, y, imgData), imgData, color);

@@ -24,6 +24,8 @@ function draw() {
 
 	imgData = getImageData(0, 0, canvas.width, canvas.height); 
 
+	console.time("pixelate");
+
 	filterImageData(imgData, FilterType.PIXELATED);
 
 	putImageData(imgData, 0, 0);

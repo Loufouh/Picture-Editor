@@ -98,21 +98,43 @@ function pixelMonochrome(pixel, color) {
 }
 
 function pixelate(imgData) {
-	for(let x = 0; x < imgData.width; x += 10) {
-		for(let y = 0; y < imgData.height; y += 10) {
-
-			let pixelSum = new Color(0);
-			
-			foreachImageDataRect(x, y, 10, 10, imgData, (pixel, i, j) => {
-				pixelSum.add( pixel )
-			});
-			
-			let averagePixel = Color.divide(pixelSum, 100);
-
-			foreachImageDataRect(x, y, 10, 10, imgData, (pixel, i, j) => {
-				setPixel(i, j, imgData, averagePixel);
-			});
+	for(let x = 0; x < imgData.width - imgData.width%10; x += 10) {
+		for(let y = 0; y < imgData.height - imgData.height%10; y += 10) {
+			smoothImageDataRect(imgData, x, y, 10, 10);
 		}
 	}
+
+	if(imgData.width%10 !== 0) {
+		for(let y = 0; y < (imgData.height - imgData.height%10); y += 10) {
+			smoothImageDataRect(imgData, (imgData.width - imgData.width%10), y, imgData.width%10, 10);
+		}
+	}
+
+	if(imgData.height%10 !== 0) {
+		for(let x = 0; x < (imgData.width - imgData.width%10); x += 10) {
+			smoothImageDataRect(imgData, x, (imgData.height - imgData.height%10), 10, imgData.height%10);
+		}
+	}
+
+	if(imgData.width%10 !== 0 && imgData.height%10 !== 0)
+		smoothImageDataRect(imgData, (imgData.width - imgData.width%10), (imgData.height - imgData.height%10), imgData.width%10, imgData.height%10);
+
 	return imgData;
+}
+
+// Fill the area with the average color
+function smoothImageDataRect(imgData, posX, posY, width, height) {
+	if( ( posX < 0 || posX + width > imgData.width ) ||
+	    ( posY < 0 || posY + height > imgData.height ) )
+		return error("The position and the dimensions precised don't match with imgData's dimensions.", imgData);
+
+	let pixelSum = new Color(0);
+
+	foreachImageDataRect( posX, posY, width, height, imgData, (pixel) => { pixelSum.add(pixel) } );
+
+	let averagePixel = Color.divide(pixelSum, height*width);
+
+	mapImageDataRect(posX, posY, width, height, imgData, () => averagePixel)
+
+	return imgData
 }
