@@ -4,6 +4,9 @@ let canvas;
 let imgData;
 let img;
 
+let animationTimeout;
+
+
 window.onload = init;
 
 function init() {
@@ -24,10 +27,6 @@ function draw() {
 
 	imgData = getImageData(0, 0, canvas.width, canvas.height); 
 
-	console.time("pixelate");
-
-	filterImageData(imgData, FilterType.PIXELATED);
-
+	filterImageData(imgData, FilterType.SEPIA);
 	putImageData(imgData, 0, 0);
 }
-

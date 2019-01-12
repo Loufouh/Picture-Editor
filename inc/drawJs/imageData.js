@@ -55,18 +55,17 @@ function setPixel(x, y, imgData, color) {
 }
 
 function setPixelByIndex(i, imgData, color) {
-	imgData.data[i] = color.r;
-	imgData.data[i + 1] = color.g;
-	imgData.data[i + 2] = color.b;
-	imgData.data[i + 3] = Math.floor(color.a*255);
-
+	imgData.data[i*4] = color.r;
+	imgData.data[i*4 + 1] = color.g;
+	imgData.data[i*4 + 2] = color.b;
+	imgData.data[i*4 + 3] = Math.floor(color.a*255);
 }
 
 function getPixelByIndex(i, imgData) {	
-	return new Color( imgData.data[i],
-			  imgData.data[i + 1],
-			  imgData.data[i + 2],
-			  Math.floor(imgData.data[i + 3]/255) );
+	return new Color( imgData.data[i*4],
+			  imgData.data[i*4 + 1],
+			  imgData.data[i*4 + 2],
+			  Math.floor(imgData.data[i*4 + 3]/255) );
 }
 
 function getPixelIndex(x, y, imgData) {
@@ -75,7 +74,7 @@ function getPixelIndex(x, y, imgData) {
 	if(y < 0 || y >= imgData.height)
 		return error("y has a wrong value ! (" + y + ")", 0);
 
-	return 4*y*imgData.width + x*4;
+	return y*imgData.width + x;
 }
 
 function createImageData(width, height, ctx=targetContext) {
