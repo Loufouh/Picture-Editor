@@ -34,7 +34,7 @@ function draw() {
 	filterImageData(imgData2, FilterType.SEPIA);
 	putImageData(imgData1, 0, 0);
 
-	//setTimeout(() => animation(0), 50);
+	setTimeout(() => animation(0), 50);
 }
 
 function animation(i) {
