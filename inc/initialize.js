@@ -30,10 +30,13 @@ function draw() {
 	imgData1 = getImageData(0, 0, canvas.width, canvas.height); 
 	imgData2 = getImageData(0, 0, canvas.width, canvas.height); 
 
-	filterImageData(imgData2, FilterType.PIXELATED);
-
+	filterImageData(imgData2, FilterType.SEPIA);
 	putImageData(imgData1, 0, 0);
+	
+	startAnimation();
+}
 
+function startAnimation() {
 	animation(0);
 	setTimeout(() => animation(1), 800);
 }
