@@ -19,7 +19,6 @@ function init() {
 
 	img.src = "img/link.jpg";
 	img.onload = draw;
-
 }
 
 function draw() {
