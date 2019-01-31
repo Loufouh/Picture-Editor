@@ -1,0 +1,19 @@
+* {
+	margin: 0;
+}
+
+body { 
+	display: flex;
+}
+
+#centerContainer {
+	width: 65%;
+}
+
+#rightContainer {
+	width: 35%;
+	height: 100vh;
+
+	border-left: 3px solid black
+}
+

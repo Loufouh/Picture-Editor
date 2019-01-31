@@ -1,0 +1,15 @@
+#preselectionTabContainer {
+	display: flex;
+
+	height: 10vh;
+
+	border-bottom: 3px solid black;
+}
+
+.tab {
+	width: 20%;
+	height: 100%;
+
+	border-right: 3px solid black;
+}
+

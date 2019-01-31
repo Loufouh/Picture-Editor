@@ -2,26 +2,48 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>Color js</title>
+	<title>Les filtres d'images</title>
 
-	<script src="inc/math/random.js"></script>
-	<script src="inc/math/Vector.js"></script>
+	<link rel="stylesheet" href="assets/style/main.css">
 
-	<script src="inc/drawJs/coordinate.js"></script>
-	<script src="inc/drawJs/ColorType.js"></script>
-	<script src="inc/drawJs/Color.js"></script>
-	<script src="inc/drawJs/imageData.js"></script>
-	<script src="inc/drawJs/shapes.js"></script>
-	<script src="inc/drawJs/style.js"></script>
-	<script src="inc/drawJs/text.js"></script>
+	<link rel="stylesheet" href="assets/style/center_container/imageContainer.css">
+	<link rel="stylesheet" href="assets/style/center_container/settingsContainer.css">
 
-	<script src="inc/drawJs/FilterType.js"></script>
-	<script src="inc/drawJs/filter.js"></script>
+	<link rel="stylesheet" href="assets/style/right_container/preselectionList.css">
+	<link rel="stylesheet" href="assets/style/right_container/preselectionTabContainer.css">
 
-	<script src="inc/error.js"></script>
-	<script src="inc/initialize.js"></script>
+	<script src="assets/js/math/random.js"></script>
+	<script src="assets/js/math/Vector.js"></script>
+
+	<script src="assets/js/drawJs/coordinate.js"></script>
+	<script src="assets/js/drawJs/ColorType.js"></script>
+	<script src="assets/js/drawJs/Color.js"></script>
+	<script src="assets/js/drawJs/imageData.js"></script>
+	<script src="assets/js/drawJs/shapes.js"></script>
+	<script src="assets/js/drawJs/style.js"></script>
+	<script src="assets/js/drawJs/text.js"></script>
+
+	<script src="assets/js/drawJs/FilterType.js"></script>
+	<script src="assets/js/drawJs/filter.js"></script>
+
+	<script src="assets/js/error.js"></script>
+	<script src="assets/js/initialize.js"></script>
 </head>
 <body>
-	<canvas height="700" width="800"></canvas>
+	<div id="centerContainer">
+		<div id="imgContainer">
+			<input type="file">
+			<canvas height="700" width="800"></canvas>
+		</div>
+		<div id="settingsContainer">
+		</div>
+	</div>
+	
+	<div id="rightContainer">
+		<div id="preselectionTabContainer">
+			<div id="addFilter" class="tab"></div>
+			<div id="filterChain" class="tab"></div>
+		</div>
+	</div>
 </body>
 </html>
