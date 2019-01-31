@@ -7,9 +7,16 @@
 }
 
 .tab {
+	display: flex;
+	
+	justify-content: center;
+	align-items: center;
+	
 	width: 20%;
 	height: 100%;
 
 	border-right: 3px solid black;
+
+	font-size: 25px;
 }
 

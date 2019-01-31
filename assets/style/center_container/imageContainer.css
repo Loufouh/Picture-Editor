@@ -6,7 +6,13 @@
 	display: flex;
 	
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
+}
+
+canvas {
+	margin-top: 50px;
+	
+	border-radius: 3px;
 }
 
