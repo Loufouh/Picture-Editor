@@ -2,8 +2,7 @@
 
 let canvas;
 
-let imgData1;
-let imgData2;
+let imgData;
 
 let img;
 
@@ -26,31 +25,9 @@ function draw() {
 	canvas.height = img.height
 	drawImage(img, 0, 0, img.width, img.height);
 
-	imgData1 = getImageData(0, 0, canvas.width, canvas.height); 
-	imgData2 = getImageData(0, 0, canvas.width, canvas.height); 
+	imgData = getImageData(0, 0, canvas.width, canvas.height); 
 
-	filterImageData(imgData2, FilterType.SEPIA);
-	putImageData(imgData1, 0, 0);
-	
-	startAnimation();
+	filterImageData(imgData, FilterType.SEPIA);
+	putImageData(imgData, 0, 0);
 }
 
-function startAnimation() {
-	animation(0);
-	setTimeout(() => animation(1), 800);
-}
-
-function animation(i) {
-	let j;
-
-	for(j = i; j < i + 2500 && j < imgData1.data.length/4; j += 2) {
-		setPixelByIndex(j, imgData1, getPixelByIndex(j, imgData2))
-	}
-	i = j;
-
-	if(i < imgData1.data.length/4) {
-		setTimeout(() => animation(i), 10);
-	}
-
-	putImageData(imgData1, 0, 0);
-}
