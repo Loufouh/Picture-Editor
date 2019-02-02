@@ -18,5 +18,20 @@
 	border-right: 3px solid black;
 
 	font-size: 25px;
+	
+	user-select: none; 
+	-moz-user-select: none;
+	cursor: pointer;
+
+	transition: 250ms background-color;
+
+}
+
+.tab:hover {
+	background-color: hsl(190, 100%, 90%);
+}
+
+.tab.selected {
+	background-color: hsl(190, 100%, 80%); 
 }
 

@@ -1,0 +1,29 @@
+#preselectionList {
+	display: flex;
+	
+	overflow: hidden;
+
+	flex-direction: column;
+	align-items: center;
+}
+
+.filterElement {
+	display: flex;
+	
+	flex-direction: column;
+	align-items: center;
+
+	border-radius: 3px;
+	background-color: lightgreen;
+
+	width: 90%;
+	height: 200px;
+
+	padding: 10px;
+	margin: 10px;;
+}
+
+.filterImg {
+	margin: 5px;
+	width: 92%;
+}

@@ -7,6 +7,10 @@ body {
 	display: flex;
 }
 
+img {
+	border-radius: 3px;
+}
+
 #centerContainer {
 	width: 65%;
 }

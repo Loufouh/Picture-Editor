@@ -16,7 +16,7 @@ function init() {
 
 	img = new Image();
 
-	img.src = "assets/img/link.jpg";
+	img.src = "assets/img/balloon.jpg";
 	img.onload = draw;
 }
 
