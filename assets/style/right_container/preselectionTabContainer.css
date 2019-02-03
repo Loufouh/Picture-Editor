@@ -21,8 +21,6 @@
 
 	font-size: 25px;
 	
-	user-select: none; 
-	-moz-user-select: none;
 	cursor: pointer;
 
 	transition: 200ms background-color, 200ms border-bottom;

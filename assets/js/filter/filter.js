@@ -52,24 +52,38 @@ function pixelNegativeFilter(pixel) {
 	return pixel;
 }
 
-function pixelBlackAndWhite1Filter(pixel) {
-	pixel.r = pixel.g = pixel.b = 0.299*pixel.r + 0.587*pixel.g + 0.114*pixel.b;
-	return pixel;
+function pixelBlackAndWhite1Filter(pixel, applyOnRed=true, applyOnGreen=true, applyOnBlue=true) {
+	 return pixelEqualValueFilter(pixel, 
+				      0.299*pixel.r + 0.587*pixel.g + 0.114*pixel.b, 
+				      applyOnRed, 
+				      applyOnGreen, 
+				      applyOnBlue);
 }
 
-function pixelBlackAndWhite2Filter(pixel) {
-	pixel.r = pixel.g = pixel.b = 0.2126*pixel.r + 0.7152*pixel.g + 0.0722*pixel.b;
-	return pixel;
+function pixelBlackAndWhite2Filter(pixel, applyOnRed=true, applyOnGreen=true, applyOnBlue=true) {
+ 	return pixelEqualValueFilter(pixel, 
+				     0.2126*pixel.r + 0.7152*pixel.g + 0.0722*pixel.b, 
+				     applyOnRed, 
+				     applyOnGreen, 
+				     applyOnBlue);
 }
 
-function pixelBlackAndWhite3Filter(pixel) {
-	pixel.r = pixel.g = pixel.b = (pixel.r + pixel.g + pixel.b)/3
-	return pixel;
+function pixelBlackAndWhite3Filter(pixel, applyOnRed=true, applyOnGreen=true, applyOnBlue=true) {
+	return pixelEqualValueFilter(pixel, 
+				     (pixel.r + pixel.g + pixel.b)/3,
+				     applyOnRed, 
+				     applyOnGreen, 
+				     applyOnBlue);
 }
 
-function pixelBlackAndWhite4Filter(pixel) {
-	pixel.r = pixel.g = pixel.b = ( Math.max(pixel.r, pixel.g, pixel.b) - Math.min(pixel.r, pixel.g, pixel.b) )/2
-	return pixel;
+function pixelBlackAndWhite4Filter(pixel, applyOnRed=true, applyOnGreen=true, applyOnBlue=true) {
+	return pixelEqualValueFilter(pixel, 
+				     ( Math.max(pixel.r, pixel.g, pixel.b) - Math.min(pixel.r, pixel.g, pixel.b) )/2,
+				     (pixel.r + pixel.g + pixel.b)/3,
+				     applyOnRed, 
+				     applyOnGreen, 
+				     applyOnBlue);
+
 }
 
 function pixelBlackAndWhiteCeilFilter(pixel) {
@@ -81,6 +95,19 @@ function pixelColorCeilFilter(pixel) {
 	pixel.g = (pixel.g < 128) ? 0 : 255;
 	pixel.b = (pixel.b < 128) ? 0 : 255;
 
+	return pixel;
+}
+
+function pixelEqualValueFilter(pixel, value, applyOnRed=true, applyOnGreen=true, applyOnBlue=true) {
+	if(applyOnRed)
+		pixel.r = value;
+
+	if(applyOnGreen)
+		pixel.g = value;
+
+	if(applyOnBlue)
+		pixel.b = value;
+	
 	return pixel;
 }
 

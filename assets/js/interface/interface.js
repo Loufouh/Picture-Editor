@@ -2,22 +2,18 @@
 
 let tabs = [];
 let filterElements = [];
+let settingsPanels = [];
 
 function initInterface() {
 	initTabs();
 	initFilterElements();
+	initSettingsPanels();
 }
 
-function initTabs() {
-	tabs = document.querySelectorAll(".tab");
+function getColorFromInput(inputColorElement) {
+	let hexa = inputColorElement.value.replace('#', '');
 
-	for(let i = 0; i < tabs.length; i++)
-		tabs[i].addEventListener("click", selectTab);
-}
-
-function initFilterElements() {
-	filterElements = document.querySelectorAll(".filterElement");
-
-	for(let i = 0; i < filterElements.length; i++)
-		filterElements[i].addEventListener("click", selectFilter);
+	return new Color(parseInt(hexa.substr(0, 2), 16),
+       			 parseInt(hexa.substr(2, 2), 16),
+			 parseInt(hexa.substr(4, 2), 16));
 }

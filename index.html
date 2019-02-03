@@ -28,56 +28,126 @@
 	<script src="assets/js/filter/FilterType.js"></script>
 	<script src="assets/js/filter/filter.js"></script>
 
-	<script src="assets/js/interface/interface.js"></script>
-	<script src="assets/js/interface/tabs.js"></script>
+	<script src="assets/js/interface/settingsPanels.js"></script>
 	<script src="assets/js/interface/filterElements.js"></script>
+	<script src="assets/js/interface/tabs.js"></script>
+	<script src="assets/js/interface/interface.js"></script>
 
 	<script src="assets/js/error.js"></script>
 	<script src="assets/js/initialize.js"></script>
 </head>
 <body>
 	<div id="centerContainer">
+
 		<div id="imgContainer">
 			<input type="file">
 			<canvas height="700" width="800"></canvas>
 		</div>
+
 		<div id="settingsContainer">
+
+			<div id="monochromeSettingsPanel" class="settingsPanel">
+				<h3>Monochrome:</h3>
+				
+				<div class="settingsBody">
+
+					<div class="monochromeSettings">
+						<label>Préselection de couleurs</label>
+						<select id="monochromeSelect">
+							<option value="sepia">Sépia</option>
+						</select>
+					</div>
+
+					<div class="monochromeSettings">
+						<label>Couleurs personalisée</label>
+						<input type="color">
+		
+					</div>
+					
+					<button class="settingsSubmitButton">Valider</button>
+				</div>
+			</div>
+
+			<div id="blackAndWhiteSettingsPanel" class="settingsPanel">
+				<h3>Noir et blanc:</h3>		
+
+				<div class="settingsBody">
+
+				</div>
+			</div>
+
+			<div id="negativeSettingsPanel" class="settingsPanel">
+				<h3>Négatif:</h3>		
+
+				<div class="settingsBody">
+
+				</div>
+			</div>
+
+			<div id="ceilSettingsPanel" class="settingsPanel">
+				<h3>Seuillage:</h3>		
+
+				<div class="settingsBody">
+
+				</div>
+			</div>
+
+			<div id="pixelatedSettingsPanel" class="settingsPanel">
+				<h3>Pixélisé:</h3>		
+
+				<div class="settingsBody">
+
+				</div>
+			</div>
+
+
+
 		</div>
 	</div>
 	
 	<div id="rightContainer">
+
 		<div id="preselectionTabContainer">
-			<div id="addFilter" class="tab selected">Add filter</div>
-			<div id="filterChain" class="tab">Edit chain</div>
+
+			<div id="addFilter" class="tab selected noTextSelection">Add filter</div>
+			<div id="filterChain" class="tab noTextSelection">Edit chain</div>
+
 		</div>
 
 		<div id="preselectionList">
-			<div id="normal" class="filterElement">
+
+			<div id="normal" class="filterElement noTextSelection">
 				<h3>Normal</h3>
 				<img class="filterImg" alt="Échantillon comparant" src="assets/img/filter_samples/normal.jpg">
 			</div>
 
-			<div id="sepia" class="filterElement">
-				<h3>Sepia</h3>
+			<div id="monochrome" class="filterElement noTextSelection">
+				<h3>Monochrome</h3>
 				<img class="filterImg" alt="Échantillon sépia" src="assets/img/filter_samples/sepia.jpg">
 			</div>
-			<div id="blackAndWhite" class="filterElement">
+
+			<div id="blackAndWhite" class="filterElement noTextSelection">
 				<h3>Noir et blanc</h3>
 				<img class="filterImg" alt="Échantillon noir et blanc" src="assets/img/filter_samples/blackAndWhite.jpg">
 			</div>
-			<div id="negative" class="filterElement">
+
+			<div id="negative" class="filterElement noTextSelection">
 				<h3>Négatif</h3>
 				<img class="filterImg" alt="Échantillon négatif" src="assets/img/filter_samples/negative.jpg">
 			</div>
-			<div id="ceil" class="filterElement">
+
+			<div id="ceil" class="filterElement noTextSelection">
 				<h3>Seuillage</h3>
 				<img class="filterImg" alt="Échantillon ceuillage" src="assets/img/filter_samples/ceil.jpg">
 			</div>
-			<div id="pixelated" class="filterElement">
+
+			<div id="pixelated" class="filterElement noTextSelection">
 				<h3>Pixélisé</h3>
 				<img class="filterImg" alt="Échantillon pixélisé" src="assets/img/filter_samples/pixelated.jpg">
 			</div> 
+
 		</div>
+
 	</div>
 </body>
 </html>
