@@ -1,5 +1,12 @@
 "use strict";
 
+function applyFilter(filterType) {
+	let imgData = getImageData(0, 0, canvas.width, canvas.height); 
+
+	filterImageData(imgData, filterType);
+	putImageData(imgData, 0, 0);
+}
+
 function filterImageData(imgData, filterType) {
 	switch(filterType) {
 		case FilterType.NEGATIVE:

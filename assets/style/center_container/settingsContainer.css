@@ -1,6 +1,7 @@
 #settingsContainer {
+	background-color: white;
 
 	height: 30vh;
-	border-top: 3px solid black
+	border-right: 1px dotted #999;
 }
 

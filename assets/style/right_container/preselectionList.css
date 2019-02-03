@@ -1,7 +1,10 @@
 #preselectionList {
+	height: 89.88%;
 	display: flex;
 	
-	overflow: hidden;
+	overflow: auto;
+
+	background-color: white;
 
 	flex-direction: column;
 	align-items: center;
@@ -17,10 +20,21 @@
 	background-color: lightgreen;
 
 	width: 90%;
-	height: 200px;
 
 	padding: 10px;
 	margin: 10px;;
+
+	cursor: pointer;
+
+	transition: 200ms box-shadow;
+}
+
+.filterElement:hover {
+	box-shadow: 1px 1px 5px 1px #999;
+}
+
+.filterElement:active {
+	box-shadow: 1px 1px 3px 1px #999;
 }
 
 .filterImg {
