@@ -28,7 +28,7 @@ function selectFilter() {
 
 		case "negative":
 			initDraw();
-			showSettingsPanel(document.getElementById("negativeSettingsPanel"));
+            hideSettings();
 			applyFilter(FilterType.NEGATIVE);
 			break;
 

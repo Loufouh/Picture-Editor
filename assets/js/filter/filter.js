@@ -1,43 +1,43 @@
 "use strict";
 
-function applyFilter(filterType) {
+function applyFilter(filterType, option1, option2, option3) {
 	let imgData = getImageData(0, 0, canvas.width, canvas.height); 
 
-	filterImageData(imgData, filterType);
+	filterImageData(imgData, filterType, option1, option2, option3);
 	putImageData(imgData, 0, 0);
 }
 
-function filterImageData(imgData, filterType) {
+function filterImageData(imgData, filterType, option1, option2, option3) {
 	switch(filterType) {
 		case FilterType.NEGATIVE:
 			return mapImageData(imgData, pixelNegativeFilter);
 
 		case FilterType.BLACK_AND_WHITE1:
-			return mapImageData(imgData, pixelBlackAndWhite1Filter);
+			return mapImageData(imgData, (pixel) => pixelBlackAndWhite1Filter(pixel, option1, option2, option3));
 
 		case FilterType.BLACK_AND_WHITE2:
-			return mapImageData(imgData, pixelBlackAndWhite2Filter);
+            return mapImageData(imgData, (pixel) => pixelBlackAndWhite2Filter(pixel, option1, option2, option3));
 
 		case FilterType.BLACK_AND_WHITE3:
-			return mapImageData(imgData, pixelBlackAndWhite3Filter);
+			return mapImageData(imgData, (pixel) => pixelBlackAndWhite3Filter(pixel, option1, option2, option3));
 
 		case FilterType.BLACK_AND_WHITE4:
-			return mapImageData(imgData, pixelBlackAndWhite4Filter);
-
+			return mapImageData(imgData, (pixel) => pixelBlackAndWhite4Filter(pixel, option1, option2, option3));
+			      
 		case FilterType.BLACK_AND_WHITE_CEIL:
-			return mapImageData(imgData, pixelBlackAndWhiteCeilFilter);
+			return mapImageData(imgData, (pixel) => pixelBlackAndWhiteCeilFilter(pixel, option1));
 
 		case FilterType.COLOR_CEIL:
-			return mapImageData(imgData, pixelColorCeilFilter);
+            return mapImageData(imgData, (pixel) => pixelColorCeilFilter(pixel, option1));
 
 		case FilterType.SEPIA:
 			return mapImageData(imgData, pixelColorSepiaFilter);
 
 		case FilterType.MONOCHROME:
-			return mapImageData(imgData, (pixel) => pixelMonochromeFilter(pixel, new Color(52, 52, 255))); // TODO: to link to an element of the DOM
+			return mapImageData(imgData, (pixel) => pixelMonochromeFilter(pixel, option1));
 
 		case FilterType.PIXELATED:
-			return pixelateImageDataFilter(imgData);
+			return pixelateImageDataFilter(imgData, option1);
 
 		default:
 			return error("The filterType is undefined", imgData);
@@ -79,21 +79,20 @@ function pixelBlackAndWhite3Filter(pixel, applyOnRed=true, applyOnGreen=true, ap
 function pixelBlackAndWhite4Filter(pixel, applyOnRed=true, applyOnGreen=true, applyOnBlue=true) {
 	return pixelEqualValueFilter(pixel, 
 				     ( Math.max(pixel.r, pixel.g, pixel.b) - Math.min(pixel.r, pixel.g, pixel.b) )/2,
-				     (pixel.r + pixel.g + pixel.b)/3,
 				     applyOnRed, 
 				     applyOnGreen, 
 				     applyOnBlue);
 
 }
 
-function pixelBlackAndWhiteCeilFilter(pixel) {
-	return pixelColorCeil( pixelBlackAndWhite1Filter(pixel) );
+function pixelBlackAndWhiteCeilFilter(pixel, ceil=128) {
+	return pixelColorCeil( pixelBlackAndWhite1Filter(pixel, ceil) );
 }
 
-function pixelColorCeilFilter(pixel) {
-	pixel.r = (pixel.r < 128) ? 0 : 255;
-	pixel.g = (pixel.g < 128) ? 0 : 255;
-	pixel.b = (pixel.b < 128) ? 0 : 255;
+function pixelColorCeilFilter(pixel, ceil=128) {
+	pixel.r = (pixel.r < ceil) ? 0 : 255;
+	pixel.g = (pixel.g < ceil) ? 0 : 255;
+	pixel.b = (pixel.b < ceil) ? 0 : 255;
 
 	return pixel;
 }
@@ -131,27 +130,43 @@ function pixelMonochromeFilter(pixel, color) {
 	return pixel;
 }
 
-function pixelateImageDataFilter(imgData) {
-	for(let x = 0; x < imgData.width - imgData.width%10; x += 10) {
-		for(let y = 0; y < imgData.height - imgData.height%10; y += 10) {
-			smoothImageDataRect(imgData, x, y, 10, 10);
+function pixelateImageDataFilter(imgData, scale=10) {
+	if(scale <= 0)
+        return error("The scale is too short, it have to be bigger than 0.", imgData)
+    
+    for(let x = 0; x < imgData.width - imgData.width%scale; x += scale) {
+		for(let y = 0; y < imgData.height - imgData.height%scale; y += scale) {
+			smoothImageDataRect(imgData, x, y, scale, scale);
 		}
 	}
 
-	if(imgData.width%10 !== 0) {
-		for(let y = 0; y < (imgData.height - imgData.height%10); y += 10) {
-			smoothImageDataRect(imgData, (imgData.width - imgData.width%10), y, imgData.width%10, 10);
+	if(imgData.width%scale !== 0) {
+		for(let y = 0; y < (imgData.height - imgData.height%scale); y += scale) {
+			smoothImageDataRect( imgData, 
+                                 (imgData.width - imgData.width%scale), 
+                                 y,
+                                 imgData.width%scale,
+                                 scale);
 		}
 	}
 
-	if(imgData.height%10 !== 0) {
-		for(let x = 0; x < (imgData.width - imgData.width%10); x += 10) {
-			smoothImageDataRect(imgData, x, (imgData.height - imgData.height%10), 10, imgData.height%10);
+	if(imgData.height%scale !== 0) {
+		for(let x = 0; x < (imgData.width - imgData.width%scale); x += scale) {
+			smoothImageDataRect( imgData, 
+                                 x, 
+                                 (imgData.height - imgData.height%scale), 
+                                 scale, 
+                                 imgData.height%scale );
 		}
 	}
 
-	if(imgData.width%10 !== 0 && imgData.height%10 !== 0)
-		smoothImageDataRect(imgData, (imgData.width - imgData.width%10), (imgData.height - imgData.height%10), imgData.width%10, imgData.height%10);
+	if(imgData.width%scale !== 0 && imgData.height%scale !== 0) {
+		smoothImageDataRect( imgData, 
+                             (imgData.width - imgData.width%scale), 
+                             (imgData.height - imgData.height%scale), 
+                             imgData.width%scale,
+                             imgData.height%scale );
+    }
 
 	return imgData;
 }

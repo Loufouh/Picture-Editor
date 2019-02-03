@@ -14,7 +14,8 @@
 	padding: 10px 0 10px 20px;
 }
 
-.settingsSubmitButton {
+.settingsButton {
+    margin-right: 10px;
 	height: 20%;
 }
 
@@ -27,23 +28,47 @@
 	height: 80%;
 }
 
-.monochromeSettings {
-	background-color: white;
-
-	border-radius: 3px;
-
-	margin-right: 30px;
-
-	display: flex;
+.settings {
+    background-color: white;
+    
+    border-radius: 3px;
+    margin-right: 30px;
+    
+    display: flex;
 	flex-direction: column;
 
 	justify-content: center;
-	align-items: center;	
+	align-items: center;
+}
 
-	width: 20%;
+.settings * {
+	margin-bottom: 30px;
+}
+
+.monochromeSettings {
+    width: 20%;
 	height: 80%;
 }
 
-.monochromeSettings * {
-	margin-bottom: 30px;
+.blackAndWhiteSettings {
+    width: 25%;
+    height: 90%;
+}
+
+.blackAndWhiteSettings div {
+    margin-bottom: 1px;
+}
+
+.blackAndWhiteSettings input[type=checkbox] {
+    margin-bottom: 10px;
+}
+
+.ceilSettings {
+    width: 28%;
+    height: 80%;
+}
+
+.pixelatedSettings {
+    width: 28%;
+    height: 80%;
 }

@@ -2,8 +2,6 @@
 	display: flex;
 
 	height: 10vh;
-
-	order-bottom: 3px solid black;
 }
 
 .tab {
