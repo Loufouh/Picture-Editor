@@ -35,7 +35,7 @@ function selectFilter() {
 		case "ceil":
 			initDraw();
 			showSettingsPanel(document.getElementById("ceilSettingsPanel"));
-			applyFilter(FilterType.COLOR_CEIL);
+			applyFilter(FilterType.CEIL);
 			break;
 
 		case "pixelated":
@@ -53,7 +53,7 @@ function selectFilter() {
 		case "permutateColors":
 			initDraw();
 			showSettingsPanel(document.getElementById("permutateColorsSettingsPanel"));
-			applyFilter(FilterType.PERMUTATE_COLORS, ColorComponent.BLUE, ColorComponent.RED, ColorComponent.GREEN);
+			applyFilter(FilterType.PERMUTATE_COLORS, ColorComponent.GREEN, ColorComponent.BLUE, ColorComponent.BLUE);
 			break;
 
 		default:

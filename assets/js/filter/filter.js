@@ -18,7 +18,7 @@ function filterImageData(imgData, filterType, option1, option2, option3) {
 			return mapImageData(imgData, (pixel) => pixelBlackAndWhite1Filter(pixel, option1, option2, option3));
 
 		case FilterType.BLACK_AND_WHITE2:
-          	return mapImageData(imgData, (pixel) => pixelBlackAndWhite2Filter(pixel, option1, option2, option3));
+          		return mapImageData(imgData, (pixel) => pixelBlackAndWhite2Filter(pixel, option1, option2, option3));
 
 		case FilterType.BLACK_AND_WHITE3:
 			return mapImageData(imgData, (pixel) => pixelBlackAndWhite3Filter(pixel, option1, option2, option3));
@@ -26,10 +26,7 @@ function filterImageData(imgData, filterType, option1, option2, option3) {
 		case FilterType.BLACK_AND_WHITE4:
 			return mapImageData(imgData, (pixel) => pixelBlackAndWhite4Filter(pixel, option1, option2, option3));
 			      
-		case FilterType.BLACK_AND_WHITE_CEIL:
-			return mapImageData(imgData, (pixel) => pixelBlackAndWhiteCeilFilter(pixel, option1));
-
-		case FilterType.COLOR_CEIL:
+		case FilterType.CEIL:
 			return mapImageData(imgData, (pixel) => pixelColorCeilFilter(pixel, option1));
 
 		case FilterType.SEPIA:

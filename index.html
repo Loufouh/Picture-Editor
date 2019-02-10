@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 	<meta charset="utf-8">
 	<title>Les filtres d'images</title>
@@ -29,6 +29,10 @@
 	<script src="assets/js/filter/ColorComponent.js"></script>
 	<script src="assets/js/filter/filter.js"></script>
 
+	<script src="assets/js/filter/custom_filter/CustomFilterActionType.js"></script>
+	<script src="assets/js/filter/custom_filter/CustomFilterAction.js"></script>
+	<script src="assets/js/filter/custom_filter/CustomFilter.js"></script>
+
 	<script src="assets/js/interface/settings/monochrome.js"></script>
 	<script src="assets/js/interface/settings/blackAndWhite.js"></script>
 	<script src="assets/js/interface/settings/ceil.js"></script>
@@ -46,7 +50,7 @@
 <body>
 	<div id="centerContainer">
 		<div id="imgContainer">
-			<canvas height="700" width=800">Le canvas ne s'est pas chargé correctement.</canvas>
+			<canvas height="700" width="800">Le canvas ne s'est pas chargé correctement.</canvas>
 		</div>
 		<div id="settingsContainer">
 			<div id="monochromeSettingsPanel" class="settingsPanel hidden">
@@ -57,9 +61,9 @@
 						<label>Présélection de couleurs</label>
 						<select id="monochromeSelect">
 							<option value="sepia" selected>Sépia</option>
-							<option value="red" selected>Rouge</option>
-							<option value="green" selected>Vert</option>
-							<option value="blue" selected>Bleu</option>
+							<option value="red">Rouge</option>
+							<option value="green">Vert</option>
+							<option value="blue">Bleu</option>
 						</select>
 					</div>
 					<div class="monochromeSettings settings">
@@ -68,7 +72,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="blackAndWhiteSettingsPanel"class="settingsPanel hidden">
+			<div id="blackAndWhiteSettingsPanel" class="settingsPanel hidden">
 				<h3>Noir et blanc:</h3>
 
 				<div class="settingsBody">
@@ -150,7 +154,7 @@
 	<div id="rightContainer">
 		<div id="preselectionTabContainer">
 			<div id="addFilter" class="tab selected noTextSelection">Filtres</div>
-			<div id="filterChain" class="tab noTextSelection">Edit chain</div>
+			<div id="filterChain" class="tab noTextSelection">Créer filtres</div>
 		</div>
 		<div id="preselectionList">
 			<div id="normal" class="filterElement noTextSelection">
