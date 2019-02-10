@@ -72,3 +72,14 @@
     width: 28%;
     height: 80%;
 }
+
+.permutateColorsSettings {
+	width: 28%;
+	height: 90%;
+}
+
+.permutateColorsSettings div {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+

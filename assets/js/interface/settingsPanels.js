@@ -2,10 +2,11 @@
 
 function initSettingsPanels() {
 	settingsPanels = document.querySelectorAll(".settingsPanel");
-    initMonochromeSettings();
-    initBlackAndWhiteSettings();
-    initCeilSettings();
-    initPixelatedSettings();
+	initMonochromeSettings();
+	initBlackAndWhiteSettings();
+	initCeilSettings();
+	initPixelatedSettings();
+	initColorPermutationsSettings();
 }
 
 function showSettingsPanel(panel) {

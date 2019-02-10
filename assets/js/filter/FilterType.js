@@ -11,5 +11,7 @@ const FilterType = {
 	COLOR_CEIL: "colorCeil",
 	SEPIA: "colorSepia",
 	MONOCHROME: "monochrome",
-	PIXELATED: "pixelated"
+	PIXELATED: "pixelated",
+	SAFE_COLORS: "safeColors",
+	PERMUTATE_COLORS: "permutateColors"
 }

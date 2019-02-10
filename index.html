@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"/>
+	<meta charset="utf-8">
 	<title>Les filtres d'images</title>
-
+	
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">	
 
 	<link rel="stylesheet" href="assets/style/main.css">
@@ -26,12 +26,14 @@
 	<script src="assets/js/drawJs/text.js"></script>
 
 	<script src="assets/js/filter/FilterType.js"></script>
+	<script src="assets/js/filter/ColorComponent.js"></script>
 	<script src="assets/js/filter/filter.js"></script>
 
-    <script src="assets/js/interface/settings/monochrome.js"></script>
-    <script src="assets/js/interface/settings/blackAndWhite.js"></script>
-    <script src="assets/js/interface/settings/ceil.js"></script>
-    <script src="assets/js/interface/settings/pixelated.js"></script>
+	<script src="assets/js/interface/settings/monochrome.js"></script>
+	<script src="assets/js/interface/settings/blackAndWhite.js"></script>
+	<script src="assets/js/interface/settings/ceil.js"></script>
+	<script src="assets/js/interface/settings/pixelated.js"></script>
+	<script src="assets/js/interface/settings/colorPermutations.js"></script>
     
 	<script src="assets/js/interface/settingsPanels.js"></script>
 	<script src="assets/js/interface/filterElements.js"></script>
@@ -44,73 +46,106 @@
 <body>
 	<div id="centerContainer">
 		<div id="imgContainer">
-			<canvas height="700" width="800"></canvas>
+			<canvas height="700" width=800">Le canvas ne s'est pas chargé correctement.</canvas>
 		</div>
 		<div id="settingsContainer">
 			<div id="monochromeSettingsPanel" class="settingsPanel hidden">
 				<h3>Monochrome:</h3>
-				
+
 				<div class="settingsBody">
 					<div class="monochromeSettings settings">
-						<label>Préselection de couleurs</label>
+						<label>Présélection de couleurs</label>
 						<select id="monochromeSelect">
 							<option value="sepia" selected>Sépia</option>
-                            <option value="red">Rouge</option>
-                            <option value="green">Vert</option>
-                            <option value="blue">Bleu</option>
+							<option value="red" selected>Rouge</option>
+							<option value="green" selected>Vert</option>
+							<option value="blue" selected>Bleu</option>
 						</select>
 					</div>
 					<div class="monochromeSettings settings">
-						<label>Couleurs personalisée</label>
+						<label>Couleur personalisée</label>
 						<input id="monochromeCustomColorInput" type="color">
-		
 					</div>
 				</div>
 			</div>
-			<div id="blackAndWhiteSettingsPanel" class="settingsPanel hidden">
-				<h3>Noir et blanc:</h3>		
+			<div id="blackAndWhiteSettingsPanel"class="settingsPanel hidden">
+				<h3>Noir et blanc:</h3>
 
 				<div class="settingsBody">
-                    <div class="blackAndWhiteSettings settings">
-                        <label>Choix de la nuance</label>
-                        <select id="blackAndWhiteSelect">
-                            <option value="blackAndWhite1">Noire et blanc 1</option>
-                            <option value="blackAndWhite2">Noire et blanc 2</option>
-                            <option value="blackAndWhite3">Noire et blanc 3</option>
-                            <option value="blackAndWhite4">Noire et blanc 4</option>
-                        </select>
-                    </div>
-                    <div class="blackAndWhiteSettings settings">
-                        <label>Composantes à conserver</label>
-                        <div><label>Rouge </label><input id="blackAndWhiteRedCheckbox" type="checkbox"></div>
-                        <div><label>Vert </label><input id="blackAndWhiteGreenCheckbox" type="checkbox"></div>
-                        <div><label>Bleu </label><input id="blackAndWhiteBlueCheckbox" type="checkbox"></div>
-                    </div>
+					<div class="blackAndWhiteSettings settings">
+						<label>Choix de la nuance</label>
+						<select id="blackAndWhiteSelect">
+							<option value="blackAndWhite1">Noire et blanc 1</option>
+							<option value="blackAndWhite2">Noire et blanc 2</option>
+							<option value="blackAndWhite3">Noire et blanc 3</option>
+							<option value="blackAndWhite4">Noire et blanc 4</option>
+						</select>
+					</div>
+					<div class="blackAndWhiteSettings settings">
+						<label>Composantes à conserver</label>
+						<div><label>Rouge </label><input id="blackAndWhiteRedCheckbox" type="checkbox"></div>
+						<div><label>Vert </label><input id="blackAndWhiteGreenCheckbox" type="checkbox"></div>
+						<div><label>Bleu </label><input id="blackAndWhiteBlueCheckbox" type="checkbox"></div>
+					</div>
 				</div>
-
-            </div>
+			</div>
 			<div id="ceilSettingsPanel" class="settingsPanel hidden">
-				<h3>Seuillage:</h3>		
+				<h3>Seuillage:</h3>
 
 				<div class="settingsBody">
-                    <div class="ceilSettings settings">
-                        <label>Seuil</label>
-                        <input id="ceilSettingsInput" type="number" min="0" max="255" value="128">
-                    </div>
-                </div>
-            </div> 
-            <div id="pixelatedSettingsPanel" class="settingsPanel hidden">
-				<h3>Pixélisé:</h3>		
-
-				<div class="settingsBody">
-                    <div class="pixelatedSettings settings">
-                        <label>Taille des pixels</label>
-                        <input id="pixelatedScaleInput" type="number" min="1">
-                    </div>
-                    <button id="pixelatedSettingsApplyButton" class="settingsButton">Appliquer</button>
+					<div class="ceilSettings settings">
+						<label>Seuil</label>
+						<input id="ceilSettingsInput" type="number" min="0" max="255" value="128">
+					</div>
 				</div>
-			 </div>		
-        </div>      
+			</div>
+			<div id="pixelatedSettingsPanel" class="settingsPanel hidden">
+				<h3>Pixélisé:</h3>
+
+				<div class="settingsBody">
+					<div class="pixelatedSettings settings">
+						<label>Taille des pixels</label>
+						<input id="pixelatedScaleInput" type="number" min="1">
+					</div>
+					<button id="pixelatedSettingsApplyButton" class="settingsButton">Appliquer</button>
+				</div>
+			</div>
+			<div id="permutateColorsSettingsPanel" class="settingsPanel hidden">
+				<h3>Permuter les couleurs:</h3>
+
+				<div class="settingsBody">
+					<div class="permutateColorsSettings settings">
+						<div>
+							<label>Rouge: </label>
+							<select id="permutateColorsRedSelect">
+								<option value="none">Supprimer</option>
+								<option value="red">Rouge</option>
+								<option value="green">Vert</option>
+								<option value="blue">Bleu</option>
+							</select>
+						</div>
+						<div>
+							<label>Vert: </label>
+							<select id="permutateColorsGreenSelect">
+								<option value="none">Supprimer</option>
+								<option value="red">Rouge</option>
+								<option value="green">Vert</option>
+								<option value="blue">Bleu</option>
+							</select>
+						</div>
+						<div>
+							<label>Blue: </label>
+							<select id="permutateColorsBlueSelect">
+								<option value="none">Supprimer</option>
+								<option value="red">Rouge</option>
+								<option value="green">Vert</option>
+								<option value="blue">Bleu</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div id="rightContainer">
 		<div id="preselectionTabContainer">
@@ -136,12 +171,20 @@
 			</div>
 			<div id="ceil" class="filterElement noTextSelection">
 				<h3>Seuillage</h3>
-				<img class="filterImg" alt="Échantillon ceuillage" src="assets/img/filter_samples/ceil.jpg">
+				<img class="filterImg" alt="Échantillon seuillage" src="assets/img/filter_samples/ceil.jpg">
 			</div>
 			<div id="pixelated" class="filterElement noTextSelection">
 				<h3>Pixélisé</h3>
 				<img class="filterImg" alt="Échantillon pixélisé" src="assets/img/filter_samples/pixelated.jpg">
-			</div> 
+			</div>
+			<div id="safeColors" class="filterElement noTextSelection">
+				<h3>Couleurs sûres</h3>
+				<img class="filterImg" alt="Échantillon couleurs sûres" src="assets/img/filter_samples/safeColors.jpg">
+			</div>
+			<div id="permutateColors" class="filterElement noTextSelection">
+				<h3>Permutation des couleurs</h3>
+				<img class="filterImg" alt="Échantillon permutation des couleurs" src="assets/img/filter_samples/permutateColors.jpg">
+			</div>
 		</div>
 	</div>
 </body>

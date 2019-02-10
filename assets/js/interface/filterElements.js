@@ -28,7 +28,7 @@ function selectFilter() {
 
 		case "negative":
 			initDraw();
-            hideSettings();
+			hideSettings();
 			applyFilter(FilterType.NEGATIVE);
 			break;
 
@@ -42,6 +42,18 @@ function selectFilter() {
 			initDraw();
 			showSettingsPanel(document.getElementById("pixelatedSettingsPanel"));
 			applyFilter(FilterType.PIXELATED);
+			break;
+
+		case "safeColors":
+			initDraw();
+			hideSettings();
+			applyFilter(FilterType.SAFE_COLORS);
+			break;
+		
+		case "permutateColors":
+			initDraw();
+			showSettingsPanel(document.getElementById("permutateColorsSettingsPanel"));
+			applyFilter(FilterType.PERMUTATE_COLORS, ColorComponent.BLUE, ColorComponent.RED, ColorComponent.GREEN);
 			break;
 
 		default:

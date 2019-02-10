@@ -16,7 +16,7 @@ function filterImageData(imgData, filterType, option1, option2, option3) {
 			return mapImageData(imgData, (pixel) => pixelBlackAndWhite1Filter(pixel, option1, option2, option3));
 
 		case FilterType.BLACK_AND_WHITE2:
-            return mapImageData(imgData, (pixel) => pixelBlackAndWhite2Filter(pixel, option1, option2, option3));
+          		return mapImageData(imgData, (pixel) => pixelBlackAndWhite2Filter(pixel, option1, option2, option3));
 
 		case FilterType.BLACK_AND_WHITE3:
 			return mapImageData(imgData, (pixel) => pixelBlackAndWhite3Filter(pixel, option1, option2, option3));
@@ -28,7 +28,7 @@ function filterImageData(imgData, filterType, option1, option2, option3) {
 			return mapImageData(imgData, (pixel) => pixelBlackAndWhiteCeilFilter(pixel, option1));
 
 		case FilterType.COLOR_CEIL:
-            return mapImageData(imgData, (pixel) => pixelColorCeilFilter(pixel, option1));
+			return mapImageData(imgData, (pixel) => pixelColorCeilFilter(pixel, option1));
 
 		case FilterType.SEPIA:
 			return mapImageData(imgData, pixelColorSepiaFilter);
@@ -38,6 +38,24 @@ function filterImageData(imgData, filterType, option1, option2, option3) {
 
 		case FilterType.PIXELATED:
 			return pixelateImageDataFilter(imgData, option1);
+	
+		case FilterType.SAFE_COLORS:
+			return mapImageData(imgData, pixelSafeColorsFilter);
+
+		case FilterType.PERMUTATE_COLORS:
+			if( option1 !== ColorComponent.RED && option1 !== ColorComponent.GREEN && 
+	    		    option1 !== ColorComponent.BLUE && option1 !== ColorComponent.NONE )
+	    			return error("toRed is not a ColorComponent", imgData);
+
+			if( option2 !== ColorComponent.RED && option2 !== ColorComponent.GREEN && 
+	    		    option2 !== ColorComponent.BLUE && option2 !== ColorComponent.NONE )
+	    			return error("toGreen is not a ColorComponent", imgData);
+
+			if( option3 !== ColorComponent.RED && option3 !== ColorComponent.GREEN && 
+	    		    option3 !== ColorComponent.BLUE && option3 !== ColorComponent.NONE )
+	    			return error("toBlue is not a ColorComponent", imgData);
+
+			return mapImageData(imgData, (pixel) => pixelColorComponentFilter(pixel, option1, option2, option3));
 
 		default:
 			return error("The filterType is undefined", imgData);
@@ -132,7 +150,7 @@ function pixelMonochromeFilter(pixel, color) {
 
 function pixelateImageDataFilter(imgData, scale=10) {
 	if(scale <= 0)
-        return error("The scale is too short, it have to be bigger than 0.", imgData)
+	        return error("The scale is too short, it have to be bigger than 0.", imgData)
     
     for(let x = 0; x < imgData.width - imgData.width%scale; x += scale) {
 		for(let y = 0; y < imgData.height - imgData.height%scale; y += scale) {
@@ -162,13 +180,26 @@ function pixelateImageDataFilter(imgData, scale=10) {
 
 	if(imgData.width%scale !== 0 && imgData.height%scale !== 0) {
 		smoothImageDataRect( imgData, 
-                             (imgData.width - imgData.width%scale), 
-                             (imgData.height - imgData.height%scale), 
-                             imgData.width%scale,
-                             imgData.height%scale );
+				     (imgData.width - imgData.width%scale), 
+                             	     (imgData.height - imgData.height%scale), 
+                             	     imgData.width%scale,
+                             	     imgData.height%scale );
     }
-
 	return imgData;
+}
+
+function pixelSafeColorsFilter(pixel) {
+	pixel.r = Math.round(pixel.r/51)*51
+	pixel.g = Math.round(pixel.g/51)*51
+	pixel.b = Math.round(pixel.b/51)*51
+
+	return pixel;
+}
+
+function pixelColorComponentFilter(pixel, toRed=ColorComponent.RED, toGreen=ColorComponent.GREEN, toBlue=ColorComponent.BLUE) {
+	return new Color( getPixelComponent(pixel, toRed),
+			  getPixelComponent(pixel, toGreen),
+			  getPixelComponent(pixel, toBlue) );
 }
 
 // Fill the area with the average color
