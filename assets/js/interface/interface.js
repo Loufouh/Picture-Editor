@@ -5,7 +5,6 @@ let filterElements = [];
 let settingsPanels = [];
 
 function initInterface() {
-	initTabs();
 	initFilterElements();
 	initSettingsPanels();
 }

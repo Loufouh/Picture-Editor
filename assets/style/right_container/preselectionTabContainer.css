@@ -19,23 +19,5 @@
 	border-bottom: 2px solid #999;
 
 	font-size: 25px;
-	
-	cursor: pointer;
-
-	transition: 200ms background-color, 200ms border-bottom;
-
-}
-
-.tab:hover {
-	background-color: hsl(190, 100%, 95%);
-}
-
-.tab:active {
-	background-color: hsl(190, 50%, 83%);
-}
-
-.tab.selected {
-	background-color: hsl(190, 100%, 88%); 
-	border-bottom: 5px solid hsl(190, 100%, 40%);
 }
 
