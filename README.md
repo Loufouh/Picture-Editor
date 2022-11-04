@@ -1,1 +1,3 @@
-# miniProjet2
+# Picture Editor
+
+A basic editor for applying filters to images.
